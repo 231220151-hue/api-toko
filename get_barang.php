@@ -1,30 +1,20 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 header('Content-Type: application/json');
 
-$koneksi = mysqli_connect("127.0.0.1", "root", "", "db_toko");
+$conn = new mysqli("localhost", "root", "", "db_toko");
 
-if (!$koneksi) {
-    die("Koneksi gagal: " . mysqli_connect_error());
+if ($conn->connect_error) {
+    die(json_encode(["error" => $conn->connect_error]));
 }
 
-$query = "SELECT * FROM barang";
-$result = mysqli_query($koneksi, $query);
-
-if (!$result) {
-    die("Query error: " . mysqli_error($koneksi));
-}
+$sql = "SELECT * FROM barang";
+$result = $conn->query($sql);
 
 $data = [];
 
-while ($row = mysqli_fetch_assoc($result)) {
+while($row = $result->fetch_assoc()) {
     $data[] = $row;
 }
 
-echo json_encode([
-    "status" => "success",
-    "data" => $data
-]);
+echo json_encode($data);
 ?>
