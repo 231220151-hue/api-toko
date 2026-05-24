@@ -1,20 +1,19 @@
 <?php
+
 header('Content-Type: application/json');
 
-$conn = new mysqli("localhost", "root", "", "db_toko");
-
-if ($conn->connect_error) {
-    die(json_encode(["error" => $conn->connect_error]));
-}
+include 'koneksi.php';
 
 $sql = "SELECT * FROM barang";
-$result = $conn->query($sql);
 
-$data = [];
+$result = mysqli_query($koneksi,$sql);
 
-while($row = $result->fetch_assoc()) {
-    $data[] = $row;
+$data=[];
+
+while($row=mysqli_fetch_assoc($result)){
+    $data[]=$row;
 }
 
 echo json_encode($data);
+
 ?>
