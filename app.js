@@ -1,18 +1,38 @@
-fetch('http://localhost/app-toko/get_barang.php')
-.then(res => res.json())
+fetch('http://localhost/api-toko/api.php')
+
+.then(response => response.json())
+
 .then(data => {
-    let tbody = document.getElementById("data-barang");
+
+    let tbody = document.getElementById("dataBarang");
+
     tbody.innerHTML = "";
 
     data.forEach(item => {
+
         tbody.innerHTML += `
-            <tr>
-                <td>${item.id}</td>
-                <td>${item.nama_barang}</td>
-                <td>${item.harga}</td>
-                <td>${item.stok}</td>
-            </tr>
+        <tr>
+            <td>${item.id}</td>
+            <td>${item.nama_barang}</td>
+            <td>Rp ${parseInt(item.harga).toLocaleString("id-ID")}</td>
+            <td>${item.stok}</td>
+        </tr>
         `;
+
     });
+
 })
-.catch(err => console.log(err));
+
+.catch(error => {
+
+    console.log(error);
+
+    document.getElementById("dataBarang").innerHTML = `
+    <tr>
+        <td colspan="4">
+            Gagal memuat data
+        </td>
+    </tr>
+    `;
+
+});
