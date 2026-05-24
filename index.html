@@ -1,61 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>Daftar Barang</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f9;
-            padding: 20px;
-        }
+<title>Daftar Barang Toko</title>
 
-        h2 {
-            text-align: center;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
+body{
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#4facfe,#00f2fe);
+    min-height:100vh;
+    padding:30px;
+}
 
-        th {
-            background-color: #007bff;
-            color: white;
-        }
+.container{
+    max-width:900px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
 
-        th, td {
-            padding: 10px;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
+h1{
+    text-align:center;
+    margin-bottom:20px;
+    color:#333;
+}
 
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-    </style>
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#007bff;
+    color:white;
+    padding:15px;
+}
+
+td{
+    padding:12px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+}
+
+tr:hover{
+    background:#f2f2f2;
+}
+
+.loading{
+    text-align:center;
+    padding:20px;
+    color:gray;
+}
+</style>
 </head>
+
 <body>
 
-<h2>Daftar Barang Toko</h2>
+<div class="container">
+
+<h1>📦 Daftar Barang Toko</h1>
 
 <table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nama Barang</th>
-            <th>Harga</th>
-            <th>Stok</th>
-        </tr>
-    </thead>
-    <tbody id="dataBarang">
-        <!-- WAJIB kosong sesuai soal -->
-    </tbody>
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Nama Barang</th>
+<th>Harga</th>
+<th>Stok</th>
+</tr>
+</thead>
+
+<tbody id="dataBarang">
+<!-- WAJIB KOSONG -->
+</tbody>
+
 </table>
 
+</div>
+
 <script src="app.js"></script>
+
 </body>
 </html>
