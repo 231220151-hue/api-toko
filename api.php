@@ -1,25 +1,9 @@
 <?php
-
 header("Content-Type: application/json");
 
-// koneksi database
-$conn = mysqli_connect(
-    "localhost",
-    "root",
-    "",
-    "db_toko"
-);
+include 'koneksi.php';
 
-// cek koneksi
-if (!$conn) {
-    die(json_encode([
-        "status" => "error",
-        "message" => mysqli_connect_error()
-    ]));
-}
-
-// ambil data
-$query = mysqli_query($conn, "SELECT * FROM barang");
+$query = mysqli_query($koneksi, "SELECT * FROM barang ORDER BY id DESC");
 
 $data = [];
 
@@ -27,7 +11,5 @@ while ($row = mysqli_fetch_assoc($query)) {
     $data[] = $row;
 }
 
-// kirim json
 echo json_encode($data);
-
 ?>

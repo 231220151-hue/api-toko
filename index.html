@@ -21,7 +21,7 @@ body{
 }
 
 .container{
-    max-width:900px;
+    max-width:1100px;
     margin:auto;
     background:white;
     padding:25px;
@@ -30,8 +30,78 @@ body{
 }
 
 h1{
-    text-align:center;
+    color:#333;
+}
+
+.header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
     margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+.thumbnail{
+    width:70px;
+    height:70px;
+    object-fit:cover;
+    border-radius:8px;
+    border:1px solid #ddd;
+}
+
+.gambar-kosong{
+    color:#777;
+    font-size:13px;
+}
+
+button{
+    padding:12px 20px;
+    background:#007bff;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    margin:2px;
+}
+
+button:hover{
+    background:#0056b3;
+}
+
+button:disabled{
+    background:#999;
+    cursor:not-allowed;
+}
+
+.btn-edit{
+    background:#28a745;
+}
+
+.btn-hapus{
+    background:#dc3545;
+}
+
+.search-box{
+    margin:20px 0;
+}
+
+.pagination{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+    margin-top:20px;
+}
+
+#infoHalaman{
+    font-weight:bold;
     color:#333;
 }
 
@@ -55,12 +125,6 @@ td{
 tr:hover{
     background:#f2f2f2;
 }
-
-.loading{
-    text-align:center;
-    padding:20px;
-    color:gray;
-}
 </style>
 </head>
 
@@ -68,24 +132,65 @@ tr:hover{
 
 <div class="container">
 
-<h1>📦 Daftar Barang Toko</h1>
+<div class="header">
+    <h1>Daftar Barang Toko (CRUD)</h1>
+    <button type="button" class="btn-hapus" onclick="logout()">Logout</button>
+</div>
+
+<form id="formBarang" enctype="multipart/form-data">
+
+<input type="hidden" id="id_barang">
+
+<div style="margin-bottom:15px;">
+    <input type="text" id="nama_barang" placeholder="Nama Barang" required>
+</div>
+
+<div style="margin-bottom:15px;">
+    <input type="number" id="harga" placeholder="Harga" required>
+</div>
+
+<div style="margin-bottom:15px;">
+    <input type="number" id="stok" placeholder="Stok" required>
+</div>
+
+<div style="margin-bottom:15px;">
+    <input type="file" id="gambar" accept="image/jpeg,image/png,image/webp">
+</div>
+
+<button type="submit" id="btnSubmit">
+    Simpan Barang
+</button>
+
+</form>
+
+<div class="search-box">
+    <input 
+        type="text" 
+        id="inputCari" 
+        placeholder="Cari nama barang..."
+        onkeyup="cariBarang()">
+</div>
 
 <table>
-
 <thead>
 <tr>
-<th>ID</th>
-<th>Nama Barang</th>
-<th>Harga</th>
-<th>Stok</th>
+    <th>ID</th>
+    <th>Gambar</th>
+    <th>Nama Barang</th>
+    <th>Harga</th>
+    <th>Stok</th>
+    <th>Aksi</th>
 </tr>
 </thead>
 
-<tbody id="dataBarang">
-<!-- WAJIB KOSONG -->
-</tbody>
-
+<tbody id="dataBarang"></tbody>
 </table>
+
+<div class="pagination">
+    <button id="btnPrev" onclick="pindahHalaman('prev')">Prev</button>
+    <span id="infoHalaman">Halaman 1 dari 1</span>
+    <button id="btnNext" onclick="pindahHalaman('next')">Next</button>
+</div>
 
 </div>
 
