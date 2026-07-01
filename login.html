@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Login Toko PWA</title>
+<title>Login Shop</title>
 
 <style>
 *{
@@ -15,97 +15,314 @@
 
 body{
     font-family:Arial, sans-serif;
-    background:linear-gradient(135deg,#4facfe,#00f2fe);
+    background:linear-gradient(135deg,#dff6ff,#bdefff,#eaf8ff);
     min-height:100vh;
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:30px;
+    padding:24px;
 }
 
-.login-box{
+.login-wrapper{
     width:100%;
-    max-width:380px;
+    max-width:560px;
     background:white;
-    padding:28px;
-    border-radius:15px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    border:1px solid #ccecff;
+    border-radius:26px;
+    overflow:hidden;
+    box-shadow:0 14px 35px rgba(72, 178, 230, 0.22);
 }
 
-h1{
+.login-header{
+    background:linear-gradient(135deg,#eaf8ff,#d8f3ff,#f7fcff);
+    padding:44px 32px 32px;
     text-align:center;
+    border-bottom:1px solid #d5f0ff;
+}
+
+.logo-box{
+    width:82px;
+    height:82px;
+    background:linear-gradient(135deg,#7dd3fc,#38bdf8);
+    border-radius:22px;
+    margin:0 auto 22px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    box-shadow:0 10px 22px rgba(56, 189, 248, 0.35);
+}
+
+.logo-box svg{
+    width:36px;
+    height:36px;
+}
+
+.login-header h1{
+    font-size:36px;
+    margin-bottom:10px;
+    color:#0f172a;
+    font-weight:800;
+}
+
+.login-header h1 span{
+    color:#0284c7;
+}
+
+.login-header p{
+    font-size:17px;
+    color:#64748b;
+}
+
+.login-body{
+    padding:36px 42px 30px;
+    background:#ffffff;
+}
+
+.form-group{
     margin-bottom:20px;
-    color:#333;
+}
+
+label{
+    display:block;
+    font-size:18px;
+    font-weight:700;
+    color:#0f172a;
+    margin-bottom:10px;
+}
+
+.input-box{
+    position:relative;
 }
 
 input{
     width:100%;
-    padding:12px;
-    border:1px solid #ccc;
-    border-radius:8px;
-    margin-bottom:15px;
+    padding:15px 18px;
+    border:1px solid #bae6fd;
+    border-radius:14px;
+    font-size:18px;
+    outline:none;
+    color:#0f172a;
+    background:#f8fdff;
 }
 
-button{
-    width:100%;
-    padding:12px 20px;
-    background:#007bff;
-    color:white;
+input::placeholder{
+    color:#94a3b8;
+}
+
+input:focus{
+    border-color:#38bdf8;
+    box-shadow:0 0 0 4px rgba(56, 189, 248, 0.18);
+    background:white;
+}
+
+.eye-btn{
+    position:absolute;
+    right:14px;
+    top:50%;
+    transform:translateY(-50%);
     border:none;
-    border-radius:8px;
+    background:transparent;
+    color:#7aaec7;
     cursor:pointer;
+    padding:4px;
+    width:auto;
+    margin:0;
 }
 
-button:hover{
-    background:#0056b3;
+.eye-btn:hover{
+    background:transparent;
+    color:#0284c7;
+}
+
+.login-button{
+    width:100%;
+    border:none;
+    background:linear-gradient(135deg,#38bdf8,#0ea5e9);
+    color:white;
+    padding:16px 20px;
+    font-size:20px;
+    font-weight:800;
+    border-radius:16px;
+    cursor:pointer;
+    margin-top:8px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    box-shadow:0 10px 20px rgba(14, 165, 233, 0.25);
+}
+
+.login-button:hover{
+    background:linear-gradient(135deg,#0ea5e9,#0284c7);
+}
+
+.demo-box{
+    margin-top:24px;
+    background:#e0f7ff;
+    border:1px solid #7dd3fc;
+    color:#075985;
+    border-radius:14px;
+    padding:18px;
+    font-size:17px;
+    line-height:1.7;
+}
+
+.demo-box b{
+    font-weight:800;
+}
+
+.password-code{
+    background:#ffffff;
+    color:#0284c7;
+    padding:4px 8px;
+    border-radius:7px;
+    font-family:monospace;
+    font-size:15px;
+    border:1px solid #bae6fd;
+}
+
+.login-footer{
+    background:#eefaff;
+    border-top:1px solid #d5f0ff;
+    text-align:center;
+    padding:18px;
+    color:#64748b;
+    font-size:16px;
+}
+
+@media(max-width:600px){
+    body{
+        padding:0;
+        align-items:flex-start;
+    }
+
+    .login-wrapper{
+        border-radius:0;
+        min-height:100vh;
+        box-shadow:none;
+        border:none;
+    }
+
+    .login-header{
+        padding:34px 20px 24px;
+    }
+
+    .login-body{
+        padding:30px 24px;
+    }
+
+    .login-header h1{
+        font-size:30px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="login-box">
-    <h1>Login Sistem</h1>
+<div class="login-wrapper">
 
-    <form id="formLogin">
-        <input type="text" id="username" placeholder="Username" required>
-        <input type="password" id="password" placeholder="Password" required>
-        <button type="submit">Masuk</button>
-    </form>
+    <div class="login-header">
+        <div class="logo-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 7h12l1 14H5L6 7z"></path>
+                <path d="M9 7a3 3 0 0 1 6 0"></path>
+                <path d="M9 11c.8.8 1.8 1.2 3 1.2s2.2-.4 3-1.2"></path>
+            </svg>
+        </div>
+
+        <h1>Toko <span>PWA</span></h1>
+        <p><p>Dashboard Toko Pemantauan Stok dan Data Barang</p></p>
+    </div>
+
+    <div class="login-body">
+        <form id="formLogin">
+
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="username" placeholder="Masukkan username..." required>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <div class="input-box">
+                    <input type="password" id="password" placeholder="Masukkan password..." required>
+
+                    <button type="button" class="eye-btn" onclick="togglePassword()">
+                        <svg id="eyeIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" class="login-button">
+                <span>↪</span>
+                <span>Lihat Daftar Barang</span>
+            </button>
+
+        </form>
+
+        <div class="demo-box">
+            <b>🔑 Akun Demo</b> 
+            <span>(Password: <span class="password-code">12345</span>)</span>
+            <br>
+            Username: <b>admin</b>
+        </div>
+    </div>
+
+    <div class="login-footer">
+        Dihan Palupi | 231220151 | Pemograman Berbasis Platform 
+
 </div>
 
 <script>
 const API_BASE = 'http://localhost/api-toko';
 
+function togglePassword(){
+    const passwordInput = document.getElementById("password");
+
+    if(passwordInput.type === "password"){
+        passwordInput.type = "text";
+    }else{
+        passwordInput.type = "password";
+    }
+}
+
 document
 .getElementById("formLogin")
-.addEventListener("submit", function(e){
+.addEventListener("submit", async function(e){
     e.preventDefault();
 
-    fetch(API_BASE + '/login.php', {
-        method:'POST',
-        headers:{
-            'Content-Type':'application/json'
-        },
-        body:JSON.stringify({
-            username:document.getElementById("username").value,
-            password:document.getElementById("password").value
-        })
-    })
-    .then(response => response.json())
-    .then(result => {
+    try {
+        const response = await fetch(API_BASE + '/login.php?v=' + Date.now(), {
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                username:document.getElementById("username").value,
+                password:document.getElementById("password").value
+            })
+        });
+
+        const text = await response.text();
+        const result = JSON.parse(text);
+
         if(result.status === 'success'){
             localStorage.setItem('token_toko', result.token);
             alert(result.message);
-            window.location.href = 'index.html';
+            window.location.href = 'index.html?v=' + Date.now();
         }else{
             alert(result.message);
         }
-    })
-    .catch(error => {
+
+    } catch(error) {
         console.log(error);
         alert('Login gagal. Cek koneksi API.');
-    });
+    }
 });
 </script>
 

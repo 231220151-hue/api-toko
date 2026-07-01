@@ -4,6 +4,7 @@ const myToken = localStorage.getItem('token_toko');
 let halamanSaatIni = 1;
 let totalHalaman = 1;
 let keywordCari = "";
+let chartInstance = null;
 
 if(!myToken){
     alert('Anda harus login terlebih dahulu!');
@@ -135,7 +136,88 @@ function cariBarang(){
     loadData(1);
 }
 
+async function renderDashboard(){
+
+    try {
+        const response = await fetch(API_BASE + '/statistik.php?v=' + Date.now());
+        const json = await response.json();
+
+        if(json.status !== 'success'){
+            console.log(json.message);
+            return;
+        }
+
+        const ctx = document.getElementById('myChart');
+
+        if(!ctx){
+            return;
+        }
+
+        if(chartInstance !== null){
+            chartInstance.destroy();
+        }
+
+        chartInstance = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: json.chart_data.labels,
+                datasets: [{
+                    label: 'Harga Barang',
+                    data: json.chart_data.values,
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(153, 102, 255, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let value = context.raw;
+                                return 'Harga: Rp ' + parseInt(value).toLocaleString('id-ID');
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return 'Rp ' + parseInt(value).toLocaleString('id-ID');
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+    } catch(error) {
+        console.log(error);
+    }
+
+}
+
 loadData();
+renderDashboard();
 
 document
 .getElementById("formBarang")
@@ -192,6 +274,7 @@ document
         document.getElementById("btnSubmit").innerHTML = "Simpan Barang";
 
         loadData(halamanSaatIni);
+        renderDashboard();
 
     })
     .catch(error => {
@@ -247,9 +330,10 @@ function hapusBarang(id){
     .then(result => {
         alert(result.message);
         loadData(halamanSaatIni);
+        renderDashboard();
     })
     .catch(error => {
         console.log(error);
     });
 
-}   
+}

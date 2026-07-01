@@ -1,4 +1,4 @@
-const CACHE_NAME = "toko-pwa-v3";
+const CACHE_NAME = "toko-pwa-v5-dashboard-small-localhost";
 
 const urlsToCache = [
     "/",
